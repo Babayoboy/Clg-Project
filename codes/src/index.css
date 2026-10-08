@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --palette-dark: #1b1b1e;
+  --palette-surface: #373f51;
+  --palette-primary: #58a4b0;
+  --palette-secondary: #a9bcd0;
+  --palette-light: #d8dbe2;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #1b1b1e;
+  background-image: 
+    radial-gradient(rgba(88, 164, 176, 0.06) 1px, transparent 1px),
+    linear-gradient(to right, rgba(169, 188, 208, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(169, 188, 208, 0.025) 1px, transparent 1px);
+  background-size: 24px 24px, 48px 48px, 48px 48px;
+  color: #d8dbe2;
+  overflow-x: hidden;
+}
+
+/* Clinical Dossier Panels */
+.clinical-panel {
+  background: rgba(34, 40, 52, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(55, 63, 81, 0.9);
+  box-shadow: 0 4px 24px -1px rgba(27, 27, 30, 0.6), inset 0 1px 0 rgba(216, 219, 226, 0.05);
+}
+
+.clinical-panel-hover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.clinical-panel-hover:hover {
+  border-color: rgba(88, 164, 176, 0.5);
+  box-shadow: 0 10px 30px -5px rgba(88, 164, 176, 0.2), inset 0 1px 0 rgba(216, 219, 226, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Medical Corner Registration Markers */
+.medical-corners {
+  position: relative;
+}
+.medical-corners::before {
+  content: "+";
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  font-family: monospace;
+  font-size: 10px;
+  color: rgba(88, 164, 176, 0.6);
+  pointer-events: none;
+}
+.medical-corners::after {
+  content: "+";
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-family: monospace;
+  font-size: 10px;
+  color: rgba(88, 164, 176, 0.6);
+  pointer-events: none;
+}
+
+/* Glassmorphism legacy support */
+.glass-panel {
+  background: rgba(34, 40, 52, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(55, 63, 81, 0.85);
+}
+
+.glass-panel-hover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-panel-hover:hover {
+  border-color: rgba(88, 164, 176, 0.45);
+  box-shadow: 0 12px 30px -10px rgba(88, 164, 176, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Custom glowing borders */
+.border-glow-cyan {
+  border-color: rgba(88, 164, 176, 0.5);
+  box-shadow: 0 0 15px rgba(88, 164, 176, 0.3);
+}
+
+.border-glow-emerald {
+  border-color: rgba(78, 174, 140, 0.45);
+  box-shadow: 0 0 15px rgba(78, 174, 140, 0.25);
+}
+
+.border-glow-amber {
+  border-color: rgba(217, 155, 77, 0.45);
+  box-shadow: 0 0 15px rgba(217, 155, 77, 0.25);
+}
+
+/* ECG Line Animation */
+@keyframes ecgPulse {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-ecg {
+  animation: ecgPulse 6s linear infinite;
+}
+
+/* Graduated Cylinder fluid wave */
+@keyframes waveAnimation {
+  0% { transform: translateX(0) translateZ(0) scaleY(1); }
+  50% { transform: translateX(-25%) translateZ(0) scaleY(0.85); }
+  100% { transform: translateX(-50%) translateZ(0) scaleY(1); }
+}
+
+.animate-wave {
+  animation: waveAnimation 5s infinite linear;
+}
+
+/* Barcode CSS graphic */
+.barcode-strip {
+  background: repeating-linear-gradient(
+    90deg,
+    #000 0px,
+    #000 2px,
+    transparent 2px,
+    transparent 4px,
+    #000 4px,
+    #000 5px,
+    transparent 5px,
+    transparent 8px,
+    #000 8px,
+    #000 11px,
+    transparent 11px,
+    transparent 13px
+  );
+}
+
+.barcode-strip-light {
+  background: repeating-linear-gradient(
+    90deg,
+    #a9bcd0 0px,
+    #a9bcd0 2px,
+    transparent 2px,
+    transparent 4px,
+    #a9bcd0 4px,
+    #a9bcd0 5px,
+    transparent 5px,
+    transparent 8px,
+    #a9bcd0 8px,
+    #a9bcd0 11px,
+    transparent 11px,
+    transparent 13px
+  );
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #1b1b1e;
+}
+::-webkit-scrollbar-thumb {
+  background: #373f51;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #58a4b0;
+}
+
+/* Print Styles for Medical / IGNOU Project Report */
+@media print {
+  body {
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #0f172a !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .clinical-panel, .glass-panel {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+  }
+}
