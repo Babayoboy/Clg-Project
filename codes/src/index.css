@@ -11,6 +11,113 @@
   --palette-light: #d8dbe2;
 }
 
+[data-theme="light"] {
+  color-scheme: light;
+  color: #27343a;
+  background-color: #f3f6f5;
+}
+
+[data-theme="light"] [class*="bg-[#1b1b1e]"],
+[data-theme="light"] [class*="bg-[#090d16]"],
+[data-theme="light"] [class*="bg-[#0b101c]"],
+[data-theme="light"] [class*="bg-[#080c14]"],
+[data-theme="light"] [class*="bg-slate-950"] {
+  background-color: #f3f6f5 !important;
+}
+
+[data-theme="light"] [class*="bg-[#222834]"],
+[data-theme="light"] [class*="bg-slate-900"],
+[data-theme="light"] [class*="bg-[#25393d]"] {
+  background-color: #e5edeb !important;
+}
+
+[data-theme="light"] [class*="bg-[#373f51]"],
+[data-theme="light"] [class*="bg-[#4b5873]"],
+[data-theme="light"] [class*="bg-[#475269]"],
+[data-theme="light"] [class*="bg-slate-800"] {
+  background-color: #d2dfdc !important;
+}
+
+[data-theme="light"] [class*="border-[#373f51]"],
+[data-theme="light"] [class*="border-[#4b5873]"],
+[data-theme="light"] [class*="border-slate-700"],
+[data-theme="light"] [class*="border-slate-800"] {
+  border-color: #c6d3d0 !important;
+}
+
+[data-theme="light"] [class*="text-[#58a4b0]"],
+[data-theme="light"] [class*="text-teal-400"],
+[data-theme="light"] [class*="text-cyan-300"] {
+  color: #216d76 !important;
+}
+
+[data-theme="light"] [class*="text-[#a9bcd0]"],
+[data-theme="light"] [class*="text-[#d8dbe2]"],
+[data-theme="light"] [class*="text-white"],
+[data-theme="light"] [class*="text-slate-100"],
+[data-theme="light"] [class*="text-slate-200"],
+[data-theme="light"] [class*="text-slate-300"] {
+  color: #27343a !important;
+}
+
+[data-theme="light"] [class*="text-slate-400"],
+[data-theme="light"] [class*="text-slate-500"] {
+  color: #53666a !important;
+}
+
+[data-theme="light"] [class*="text-indigo-"],
+[data-theme="light"] [class*="text-purple-"],
+[data-theme="light"] [class*="text-cyan-"] {
+  color: #465e64 !important;
+}
+
+[data-theme="light"] [class*="bg-gradient-"] {
+  background-image: linear-gradient(110deg, #e5edeb, #f8faf9) !important;
+}
+
+[data-theme="light"] svg [stroke="#06b6d4"],
+[data-theme="light"] svg [stroke="#22d3ee"],
+[data-theme="light"] svg [stroke="#818cf8"],
+[data-theme="light"] svg [stroke="#c084fc"] {
+  stroke: #216d76 !important;
+}
+
+[data-theme="light"] svg [fill="#22d3ee"],
+[data-theme="light"] svg [fill="#818cf8"],
+[data-theme="light"] svg [fill="#c084fc"] {
+  fill: #58a4b0 !important;
+}
+
+[data-theme="light"] [class*="bg-[#58a4b0]"],
+[data-theme="light"] [class*="bg-teal-500"] {
+  background-color: #58a4b0 !important;
+}
+
+[data-theme="light"] [class*="text-[#1b1b1e]"] {
+  color: #ffffff !important;
+}
+
+[data-theme="light"] [class*="bg-rose-950"],
+[data-theme="light"] [class*="bg-emerald-950"],
+[data-theme="light"] [class*="bg-amber-950"] {
+  background-color: #e8eeec !important;
+}
+
+[data-theme="light"] .clinical-panel,
+[data-theme="light"] .glass-panel {
+  background-color: rgb(248 250 249 / 92%);
+  border-color: #c6d3d0;
+  box-shadow: 0 4px 24px -1px rgb(39 52 58 / 10%), inset 0 1px 0 rgb(255 255 255 / 80%);
+}
+
+[data-theme="light"] body {
+  background-color: #f3f6f5;
+  background-image: radial-gradient(rgb(33 109 118 / 7%) 1px, transparent 1px),
+    linear-gradient(to right, rgb(39 52 58 / 3%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(39 52 58 / 3%) 1px, transparent 1px);
+  color: #27343a;
+}
+
 body {
   margin: 0;
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;

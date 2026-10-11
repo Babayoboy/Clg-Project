@@ -82,7 +82,7 @@ export const SettingsModal = ({
 
         {/* Settings Form */}
         <form onSubmit={handleSubmit} className="space-y-6 mt-5 text-xs">
-          
+
           {/* Section 1: Patient Demographic Identity */}
           <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 space-y-3">
             <div className="flex items-center justify-between border-b border-slate-850 pb-2">
@@ -221,7 +221,7 @@ export const SettingsModal = ({
               className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-purple-500 font-mono"
             />
             <p className="text-[10px] text-slate-400 leading-relaxed">
-              Standard deterministic clinical lab assays operate 100% offline without key. Adding a key activates generative clinical pathology impressions and pharmacological lifestyle counseling.
+              The built-in advisor runs offline. Gemini is optional; using it sends the submitted health data to Google for processing.
             </p>
           </div>
 
@@ -231,7 +231,7 @@ export const SettingsModal = ({
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
               <div>
                 <p className="text-[11px] font-semibold text-slate-300">Air-Gapped Client Storage</p>
-                <p className="text-[9px] text-slate-500">All pathology assays are kept locally in encrypted IndexedDB / LocalStorage</p>
+                <p className="text-[9px] text-slate-500">Account data is stored in the local SQLite database on this device</p>
               </div>
             </div>
             <button

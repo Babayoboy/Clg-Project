@@ -3,16 +3,17 @@ import {
   Activity, 
   PlusCircle, 
   Sparkles, 
-  FileText, 
   BookOpen, 
   Settings, 
   ShieldCheck, 
   Calendar,
-  Database,
   HeartPulse,
   ClipboardCheck,
   Stethoscope,
-  Microscope
+  Microscope,
+  LogOut,
+  Moon,
+  Sun
 } from 'lucide-react';
 
 export const Header = ({ 
@@ -21,11 +22,10 @@ export const Header = ({
   setSelectedDate, 
   onOpenLogModal, 
   onOpenAiModal, 
-  onOpenReportModal, 
   onOpenEduModal, 
   onOpenSettingsModal,
-  onLoadSampleData,
-  onResetData
+  onSignOut,
+  onToggleTheme
 }) => {
   const formattedToday = new Date().toLocaleDateString('en-US', { 
     weekday: 'short', 
@@ -137,33 +137,31 @@ export const Header = ({
             <span className="hidden lg:inline">Protocols</span>
           </button>
 
-          {/* Official Printable Pathology / Health Report */}
-          <button
-            onClick={onOpenReportModal}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#25393d]/80 hover:bg-[#25393d] border border-[#58a4b0]/50 text-[#58a4b0] font-semibold text-xs transition-all hover:border-[#58a4b0] shadow-sm"
-            title="Generate Official Clinical Medical Report (PDF)"
-          >
-            <FileText className="w-3.5 h-3.5 text-[#58a4b0]" />
-            <span>Medical Report</span>
-          </button>
-
-          {/* Clinical Demo Dataset */}
-          <button
-            onClick={onLoadSampleData}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-[#222834] hover:bg-[#373f51] border border-[#373f51] hover:border-[#58a4b0]/50 text-[#a9bcd0] hover:text-[#58a4b0] font-medium text-xs transition-all font-mono"
-            title="Preload 14-Day Clinical Cohort Demo Data"
-          >
-            <Database className="w-3.5 h-3.5 text-[#58a4b0]" />
-            <span className="hidden xl:inline">Demo Cohort</span>
-          </button>
-
           {/* Patient Profile & Targets */}
+          <button
+            onClick={onToggleTheme}
+            className="p-2 rounded-xl bg-[#222834] hover:bg-[#373f51] border border-[#373f51] text-[#a9bcd0] hover:text-white transition-all"
+            title={`Switch to ${profile.theme === 'light' ? 'dark' : 'light'} theme`}
+            aria-label={`Switch to ${profile.theme === 'light' ? 'dark' : 'light'} theme`}
+          >
+            {profile.theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+          </button>
+
           <button
             onClick={onOpenSettingsModal}
             className="p-2 rounded-xl bg-[#222834] hover:bg-[#373f51] border border-[#373f51] text-[#a9bcd0] hover:text-white transition-all"
             title="Patient Profile & Diagnostic Targets"
           >
             <Settings className="w-4 h-4" />
+          </button>
+
+          <button
+            onClick={onSignOut}
+            className="p-2 rounded-xl bg-[#222834] hover:bg-rose-950/70 border border-[#373f51] hover:border-rose-700 text-[#a9bcd0] hover:text-rose-300 transition-all"
+            title="Sign out of local account"
+            aria-label="Sign out"
+          >
+            <LogOut className="w-4 h-4" />
           </button>
         </div>
 

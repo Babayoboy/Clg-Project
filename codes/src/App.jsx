@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   Activity, 
   Sparkles, 
@@ -9,7 +9,6 @@ import {
   FileText,
   Calendar,
   CheckCircle2,
-  Database,
   HeartPulse,
   Stethoscope,
   Microscope,
@@ -19,7 +18,6 @@ import {
   QrCode,
   Thermometer
 } from 'lucide-react';
-import confetti from 'canvas-confetti';
 
 import { Header } from './components/Header.jsx';
 import { VitalityOverview } from './components/VitalityOverview.jsx';
@@ -34,19 +32,17 @@ import { AiAdvisorModal } from './components/AiAdvisorModal.jsx';
 import { EducationalHub } from './components/EducationalHub.jsx';
 import { ReportModal } from './components/ReportModal.jsx';
 import { SettingsModal } from './components/SettingsModal.jsx';
+import { AccountGate } from './components/AccountGate.jsx';
 
-import { 
-  loadLogsFromStorage, 
-  saveLogsToStorage, 
-  loadProfileFromStorage, 
-  saveProfileToStorage 
-} from './utils/storage.js';
+import { getAccountSession, saveAccountData, signOutAccount } from './utils/localAccount.js';
 import { calculateMetricScores, generateDiagnosticReport } from './utils/scoring.js';
-import { getSampleData } from './utils/sampleData.js';
 
 export function App() {
-  const [logs, setLogs] = useState(() => loadLogsFromStorage());
-  const [profile, setProfile] = useState(() => loadProfileFromStorage());
+  const [account, setAccount] = useState(null);
+  const [accountStatus, setAccountStatus] = useState('checking');
+  const [accountError, setAccountError] = useState('');
+  const [logs, setLogs] = useState([]);
+  const [profile, setProfile] = useState(null);
   const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().split('T')[0]);
 
   // Modals state
@@ -57,14 +53,59 @@ export function App() {
   const [isEduModalOpen, setIsEduModalOpen] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
-  // Sync to localStorage
   useEffect(() => {
-    saveLogsToStorage(logs);
-  }, [logs]);
+    let active = true;
+    getAccountSession()
+      .then((session) => {
+        if (!active) return;
+        if (session) {
+          setAccount(session.account);
+          setProfile(session.profile);
+          setLogs(session.logs);
+        }
+        setAccountStatus('ready');
+      })
+      .catch((error) => {
+        if (!active) return;
+        setAccountError(error.message);
+        setAccountStatus('ready');
+      });
+    return () => { active = false; };
+  }, []);
 
   useEffect(() => {
-    saveProfileToStorage(profile);
-  }, [profile]);
+    if (account && profile) saveAccountData(profile, logs);
+  }, [account, profile, logs]);
+
+  const handleAuthenticated = (session) => {
+    setAccount(session.account);
+    setProfile(session.profile);
+    setLogs(session.logs);
+    setAccountError('');
+    setAccountStatus('ready');
+  };
+
+  const handleSignOut = async () => {
+    await signOutAccount();
+    setAccount(null);
+    setProfile(null);
+    setLogs([]);
+  };
+
+  const handleToggleTheme = () => {
+    setProfile((current) => ({
+      ...current,
+      theme: current.theme === 'light' ? 'dark' : 'light'
+    }));
+  };
+
+  if (accountStatus === 'checking') {
+    return <div className="min-h-screen bg-[#1b1b1e] text-[#a9bcd0] grid place-items-center font-mono text-sm">Connecting to local account database...</div>;
+  }
+
+  if (!account || !profile) {
+    return <AccountGate onAuthenticated={handleAuthenticated} initialError={accountError} />;
+  }
 
   // Current selected log
   const currentLog = logs.find(l => l.date === selectedDate) || {
@@ -136,27 +177,13 @@ export function App() {
     setLogs(imported);
   };
 
-  // Load Sample Demo Data
-  const handleLoadSampleData = () => {
-    const sample = getSampleData();
-    setLogs(sample);
-    setSelectedDate(new Date().toISOString().split('T')[0]);
-    try {
-      confetti({
-        particleCount: 100,
-        spread: 80,
-        origin: { y: 0.4 }
-      });
-    } catch (e) {}
-  };
-
   // Reset All Data
   const handleResetAllData = () => {
     setLogs([]);
   };
 
   return (
-    <div className="min-h-screen bg-[#1b1b1e] text-[#d8dbe2] flex flex-col justify-between selection:bg-[#58a4b0]/30 selection:text-[#d8dbe2]">
+    <div data-theme={profile.theme === 'light' ? 'light' : 'dark'} className="min-h-screen bg-[#1b1b1e] text-[#d8dbe2] flex flex-col justify-between selection:bg-[#58a4b0]/30 selection:text-[#d8dbe2]">
       
       {/* 1. CLINICAL HEADER & NAVIGATION */}
       <Header
@@ -171,8 +198,8 @@ export function App() {
         onOpenReportModal={() => setIsReportModalOpen(true)}
         onOpenEduModal={() => setIsEduModalOpen(true)}
         onOpenSettingsModal={() => setIsSettingsModalOpen(true)}
-        onLoadSampleData={handleLoadSampleData}
-        onResetData={handleResetAllData}
+        onSignOut={handleSignOut}
+        onToggleTheme={handleToggleTheme}
       />
 
       {/* 2. MAIN CLINICAL DOSSIER CONTENT */}
