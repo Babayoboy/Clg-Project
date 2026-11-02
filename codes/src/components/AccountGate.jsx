@@ -38,7 +38,7 @@ export function AccountGate({ onAuthenticated, initialError = '' }) {
             <Activity className="h-6 w-6" />
           </div>
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-[#58a4b0]">Hnazer Clinical</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-[#58a4b0]">Hnazer Health Tracker</p>
             <h1 className="text-2xl font-bold text-white">Your local health account</h1>
           </div>
         </div>
@@ -47,7 +47,7 @@ export function AccountGate({ onAuthenticated, initialError = '' }) {
           <div className="flex items-center justify-between gap-3 border-b border-[#373f51] pb-4">
             <div>
               <h2 className="text-lg font-semibold text-white">{mode === 'login' ? 'Sign in' : 'Create account'}</h2>
-              <p className="mt-1 text-xs text-[#a9bcd0]">Stored only on this device</p>
+              <p className="mt-1 text-xs text-[#a9bcd0]">Stored in this browser profile</p>
             </div>
             <LockKeyhole className="h-5 w-5 text-[#58a4b0]" />
           </div>
@@ -77,19 +77,19 @@ export function AccountGate({ onAuthenticated, initialError = '' }) {
               <input required minLength={8} maxLength={128} type="password" autoComplete={mode === 'login' ? 'current-password' : 'new-password'} value={password} onChange={(event) => setPassword(event.target.value)} className="mt-1.5 w-full rounded-lg border border-[#4b5873] bg-[#1b1b1e] px-3 py-2.5 text-sm text-white outline-none focus:border-[#58a4b0]" />
               {mode === 'register' && <span className="mt-1 block text-[11px] text-[#718096]">Use at least 8 characters.</span>}
             </label>
-            {error && <p role="alert" className="rounded-lg border border-rose-700/60 bg-rose-950/40 px-3 py-2 text-xs leading-relaxed text-rose-200">{error}</p>}
             <button disabled={busy} type="submit" className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#58a4b0] px-4 py-3 text-sm font-bold text-[#1b1b1e] transition-colors hover:bg-[#72b9c3] disabled:cursor-wait disabled:opacity-60">
               <span>{busy ? 'Please wait...' : mode === 'login' ? 'Sign in locally' : 'Create local account'}</span>
             </button>
+
           </form>
 
           <div className="mt-6 flex gap-3 border-t border-[#373f51] pt-4 text-[11px] leading-relaxed text-[#a9bcd0]">
             <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
-            <p>Your password is stored as a salted hash. Your profile and logs stay in a SQLite database on this computer.</p>
+            <p>Your password is stored as a salted hash. Profiles and logs stay in this browser profile and are not shared across devices.</p>
           </div>
         </section>
         <p className="mt-4 flex items-center justify-center gap-2 text-[11px] text-[#718096]">
-          <Database className="h-3.5 w-3.5" /> Local database service required
+          <Database className="h-3.5 w-3.5" /> Browser storage required
         </p>
       </div>
     </main>

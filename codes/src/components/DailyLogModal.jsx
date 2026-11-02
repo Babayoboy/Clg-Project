@@ -97,12 +97,12 @@ export const DailyLogModal = ({
   };
 
   const moods = [
-    { label: 'Energized', emoji: '⚡', clinical: 'Hyper-Energetic', color: 'border-amber-400 text-amber-400 bg-amber-500/10' },
-    { label: 'Good', emoji: '😊', clinical: 'Euthymic (Optimal)', color: 'border-emerald-400 text-emerald-400 bg-emerald-500/10' },
-    { label: 'Neutral', emoji: '😐', clinical: 'Normo-Affect', color: 'border-cyan-400 text-cyan-400 bg-cyan-500/10' },
-    { label: 'Tired', emoji: '🥱', clinical: 'Mild Somnolence', color: 'border-indigo-400 text-indigo-400 bg-indigo-500/10' },
-    { label: 'Stressed', emoji: '😫', clinical: 'Cortisol Strain', color: 'border-rose-400 text-rose-400 bg-rose-500/10' },
-    { label: 'Burnout Alert', emoji: '🤯', clinical: 'Acute Neuro-Fatigue', color: 'border-red-500 text-red-500 bg-red-500/20' }
+    { label: 'Energized', emoji: '⚡', clinical: 'High Energy', color: 'border-amber-400 text-amber-400 bg-amber-500/10' },
+    { label: 'Good', emoji: '😊', clinical: 'Positive & Calm', color: 'border-emerald-400 text-emerald-400 bg-emerald-500/10' },
+    { label: 'Neutral', emoji: '😐', clinical: 'Steady', color: 'border-cyan-400 text-cyan-400 bg-cyan-500/10' },
+    { label: 'Tired', emoji: '🥱', clinical: 'Need Rest', color: 'border-indigo-400 text-indigo-400 bg-indigo-500/10' },
+    { label: 'Stressed', emoji: '😫', clinical: 'High Pressure', color: 'border-rose-400 text-rose-400 bg-rose-500/10' },
+    { label: 'Burnout Alert', emoji: '🤯', clinical: 'Exhausted', color: 'border-red-500 text-red-500 bg-red-500/20' }
   ];
 
   const dietOptions = ['Healthy', 'Balanced', 'Average', 'Fast Food', 'Irregular'];
@@ -115,14 +115,14 @@ export const DailyLogModal = ({
         <div className="flex items-center justify-between pb-4 border-b border-slate-800">
           <div>
             <span className="text-[10px] text-cyan-400 font-bold uppercase tracking-wider block">
-              INTAKE PROTOCOL #LOG-01
+              DAILY HABIT ENTRY
             </span>
             <h2 className="text-base font-bold text-white flex items-center gap-2 mt-0.5 font-display">
               <FlaskConical className="w-5 h-5 text-cyan-400" />
-              {initialData ? 'Edit Biometric Assay Entry' : 'Log Daily Biometric Assay'}
+              {initialData ? 'Edit Daily Habit Entry' : 'Log Daily Habits'}
             </h2>
             <p className="text-xs text-slate-400 font-sans">
-              Enter clinical readings for Circadian Rest, Fluidics, Kinetics, and Neuro-Screen Exposure
+              Record your daily habits for sleep, water intake, exercise, and screen time
             </p>
           </div>
           <button
@@ -136,10 +136,10 @@ export const DailyLogModal = ({
         {/* Form Body */}
         <form onSubmit={handleSubmit} className="space-y-5 mt-4 text-xs">
           
-          {/* Specimen Date Selector */}
+          {/* Date Selector */}
           <div>
             <label className="block font-bold text-slate-300 mb-1">
-              Specimen Record Date (YYYY-MM-DD)
+              Log Date (YYYY-MM-DD)
             </label>
             <input
               type="date"
@@ -157,7 +157,7 @@ export const DailyLogModal = ({
             <div className="bg-slate-950/80 border border-slate-800 p-3.5 rounded-2xl">
               <div className="flex justify-between items-center mb-1.5">
                 <span className="font-semibold text-indigo-300 flex items-center gap-1.5">
-                  <Moon className="w-4 h-4 text-indigo-400" /> [LAB-SLP] Sleep Duration
+                  <Moon className="w-4 h-4 text-indigo-400" /> Sleep Duration
                 </span>
                 <span className="text-xs font-bold text-white bg-slate-800 px-2 py-0.5 rounded">
                   {sleepHour} hrs
@@ -174,7 +174,7 @@ export const DailyLogModal = ({
               />
               <div className="flex justify-between text-[10px] text-slate-500 mt-1">
                 <span>0h</span>
-                <span className="text-indigo-300 font-semibold">7-9h (Standard Ref)</span>
+                <span className="text-indigo-300 font-semibold">7-9h (Target)</span>
                 <span>14h</span>
               </div>
             </div>
@@ -183,7 +183,7 @@ export const DailyLogModal = ({
             <div className="bg-slate-950/80 border border-slate-800 p-3.5 rounded-2xl">
               <div className="flex justify-between items-center mb-1.5">
                 <span className="font-semibold text-amber-300 flex items-center gap-1.5">
-                  <Flame className="w-4 h-4 text-amber-400" /> [LAB-ACT] Kinetic Load
+                  <Flame className="w-4 h-4 text-amber-400" /> Exercise & Activity
                 </span>
                 <span className="text-xs font-bold text-white bg-slate-800 px-2 py-0.5 rounded">
                   {Math.round(exerciseTime * 60)} min ({exerciseTime}h)
@@ -209,7 +209,7 @@ export const DailyLogModal = ({
             <div className="bg-slate-950/80 border border-slate-800 p-3.5 rounded-2xl">
               <div className="flex justify-between items-center mb-1.5">
                 <span className="font-semibold text-cyan-300 flex items-center gap-1.5">
-                  <Droplet className="w-4 h-4 text-cyan-400" /> [LAB-H2O] Fluid Volume
+                  <Droplet className="w-4 h-4 text-cyan-400" /> Water Intake
                 </span>
                 <span className="text-xs font-bold text-white bg-slate-800 px-2 py-0.5 rounded">
                   {waterIntake} Litres
@@ -226,7 +226,7 @@ export const DailyLogModal = ({
               />
               <div className="flex justify-between text-[10px] text-slate-500 mt-1">
                 <span>0L</span>
-                <span className="text-cyan-300 font-semibold">&ge; 3.0L (Standard)</span>
+                <span className="text-cyan-300 font-semibold">&ge; 3.0L (Target)</span>
                 <span>6L</span>
               </div>
             </div>
@@ -235,7 +235,7 @@ export const DailyLogModal = ({
             <div className="bg-slate-950/80 border border-slate-800 p-3.5 rounded-2xl">
               <div className="flex justify-between items-center mb-1.5">
                 <span className="font-semibold text-purple-300 flex items-center gap-1.5">
-                  <Monitor className="w-4 h-4 text-purple-400" /> [LAB-SCR] Screen Load
+                  <Monitor className="w-4 h-4 text-purple-400" /> Screen Time
                 </span>
                 <span className="text-xs font-bold text-white bg-slate-800 px-2 py-0.5 rounded">
                   {screenTime} hrs
@@ -252,7 +252,7 @@ export const DailyLogModal = ({
               />
               <div className="flex justify-between text-[10px] text-slate-500 mt-1">
                 <span>0h</span>
-                <span className="text-purple-300 font-semibold">&le; 5h (Safe Ceiling)</span>
+                <span className="text-purple-300 font-semibold">&le; 5h (Target Limit)</span>
                 <span>16h</span>
               </div>
             </div>
@@ -262,7 +262,7 @@ export const DailyLogModal = ({
           {/* 5. Mood Selector */}
           <div>
             <label className="block font-bold text-slate-300 mb-1.5 flex items-center gap-1.5">
-              <Smile className="w-4 h-4 text-teal-400" /> [LAB-PSY] Affective & Psycho-Emotional State
+              <Smile className="w-4 h-4 text-teal-400" /> Daily Mood & Energy
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {moods.map((m) => (
@@ -289,7 +289,7 @@ export const DailyLogModal = ({
           {/* 6. Diet Quality Selector */}
           <div>
             <label className="block font-bold text-slate-300 mb-1.5 flex items-center gap-1.5">
-              <Utensils className="w-4 h-4 text-emerald-400" /> [LAB-NUT] Nutritional Pattern
+              <Utensils className="w-4 h-4 text-emerald-400" /> Nutritional Pattern
             </label>
             <div className="flex flex-wrap gap-2">
               {dietOptions.map((d) => (
@@ -309,16 +309,16 @@ export const DailyLogModal = ({
             </div>
           </div>
 
-          {/* 7. Clinical Observations / Notes */}
+          {/* 7. Personal Notes */}
           <div>
             <label className="block font-bold text-slate-300 mb-1">
-              Subjective Clinical Notes & Triggers (Optional)
+              Personal Notes & Reflections (Optional)
             </label>
             <textarea
               rows="2"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="e.g. Completed 45 min kinetic workout, evening screen exposure was limited, hydration maintained..."
+              placeholder="e.g. 45 min outdoor walk, limited evening screen time, stayed hydrated..."
               className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors font-sans"
             ></textarea>
           </div>
@@ -337,7 +337,7 @@ export const DailyLogModal = ({
               className="flex items-center gap-2 px-6 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/25 transition-all hover:scale-105 active:scale-95"
             >
               <Save className="w-4 h-4 stroke-[2.5]" />
-              <span>Commit Assay Log</span>
+              <span>Save Daily Log</span>
             </button>
           </div>
 

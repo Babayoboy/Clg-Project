@@ -38,22 +38,22 @@ export const HabitHeatmap = ({ logs, profile, selectedDate, onSelectDate }) => {
           </span>
           <h3 className="text-xs font-bold text-white flex items-center gap-1.5 mt-0.5">
             <Calendar className="w-3.5 h-3.5 text-cyan-400" />
-            35-Day Patient Biometric Compliance Matrix
+            35-Day Habit Consistency Heatmap
           </h3>
           <p className="text-[10px] text-slate-400 font-sans">
-            Longitudinal habit adherence and biomarker stability tracking (Select any cell to inspect dossier)
+            Daily habit score history (Click any day to view details)
           </p>
         </div>
 
-        {/* Clinical Compliance Legend */}
+        {/* Legend */}
         <div className="flex items-center gap-1.5 text-[9px] text-slate-400 bg-slate-950/80 px-2.5 py-1 rounded-lg border border-slate-800">
-          <span>Non-Compliant</span>
+          <span>Needs Work</span>
           <span className="w-2.5 h-2.5 rounded bg-slate-900 border border-slate-700"></span>
           <span className="w-2.5 h-2.5 rounded bg-rose-600/80"></span>
           <span className="w-2.5 h-2.5 rounded bg-amber-500/80"></span>
           <span className="w-2.5 h-2.5 rounded bg-cyan-500/90"></span>
           <span className="w-2.5 h-2.5 rounded bg-emerald-500"></span>
-          <span>Homeostatic</span>
+          <span>Consistent</span>
         </div>
       </div>
 
@@ -78,7 +78,7 @@ export const HabitHeatmap = ({ logs, profile, selectedDate, onSelectDate }) => {
               className={`h-9 rounded-lg flex flex-col items-center justify-center p-0.5 text-xs border transition-all relative group ${cellBg} ${
                 isSelected ? 'ring-2 ring-cyan-400 ring-offset-2 ring-offset-slate-950 scale-105 z-10' : ''
               }`}
-              title={`${item.dateStr}: ${score !== undefined ? `${score} pts (${item.data.mood})` : 'No specimen recorded'}`}
+              title={`${item.dateStr}: ${score !== undefined ? `${score} pts (${item.data.mood})` : 'No entry logged'}`}
             >
               <span className="text-[9px] leading-none opacity-80">{item.dayNumber}</span>
               {score !== undefined && (
@@ -99,8 +99,8 @@ export const HabitHeatmap = ({ logs, profile, selectedDate, onSelectDate }) => {
       </div>
 
       <div className="pt-2.5 border-t border-slate-800 flex items-center justify-between text-[10px] text-slate-400">
-        <span>ACTIVE DOSSIER DATE: <strong className="text-cyan-300">{selectedDate}</strong></span>
-        <span>Diagnostic Target: &ge; 85 Pts (Grade A)</span>
+        <span>SELECTED DATE: <strong className="text-cyan-300">{selectedDate}</strong></span>
+        <span>Target: &ge; 85 Pts</span>
       </div>
 
     </div>

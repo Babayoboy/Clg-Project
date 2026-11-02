@@ -66,13 +66,13 @@ export const AiAdvisorModal = ({ isOpen, onClose, logs, profile, onUpdateProfile
             </div>
             <div>
               <span className="text-[10px] text-purple-400 font-bold uppercase tracking-wider block">
-                CLINICAL DECISION SUPPORT SYSTEM (CDSS)
+                AI WELLNESS ADVISOR
               </span>
               <h2 className="text-base font-bold font-display text-white mt-0.5">
-                AI Diagnostic Consultant & Differential Analysis
+                Daily Lifestyle & Habit Insights
               </h2>
               <p className="text-[11px] text-slate-400 font-sans">
-                Evidence-based circadian synthesis & personalized lifestyle intervention protocol
+                Personalized habit observations and actionable routine suggestions
               </p>
             </div>
           </div>
@@ -82,6 +82,12 @@ export const AiAdvisorModal = ({ isOpen, onClose, logs, profile, onUpdateProfile
           >
             <X className="w-5 h-5" />
           </button>
+        </div>
+
+        {/* Caution Notice */}
+        <div className="flex items-center gap-2 mt-3 px-3.5 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/25 text-amber-300 text-[11px] font-sans">
+          <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
+          <span><strong>Notice:</strong> For lifestyle and habit tracking only. Not a clinical diagnosis, medical advice, or treatment plan.</span>
         </div>
 
         {/* Engine Tabs */}
@@ -95,7 +101,7 @@ export const AiAdvisorModal = ({ isOpen, onClose, logs, profile, onUpdateProfile
             }`}
           >
             <Cpu className="w-3.5 h-3.5" />
-            <span>On-Device Clinical Engine (Default)</span>
+            <span>On-Device Engine (Default)</span>
           </button>
 
           <button
@@ -111,22 +117,22 @@ export const AiAdvisorModal = ({ isOpen, onClose, logs, profile, onUpdateProfile
           </button>
         </div>
 
-        {/* TAB 1: ON-DEVICE LOCAL CLINICAL ENGINE */}
+        {/* TAB 1: ON-DEVICE LOCAL ENGINE */}
         {activeTab === 'local' && (
           <div className="space-y-4">
             {/* Privacy Shield */}
             <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-950/40 border border-emerald-800/50 text-emerald-300 text-xs font-sans">
               <ShieldCheck className="w-4 h-4 shrink-0 text-emerald-400" />
               <span>
-                <strong>Zero Data Egress:</strong> Biometric differentials are evaluated 100% in-browser on your local machine.
+                <strong>Zero Data Egress:</strong> Habit metrics are evaluated 100% in-browser on your local machine.
               </span>
             </div>
 
-            {/* Diagnostic Impression Summary */}
+            {/* Habit Assessment Summary */}
             <div className="bg-slate-950/90 border border-slate-800 rounded-2xl p-4">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1">
-                  <HeartPulse className="w-3.5 h-3.5" /> Clinical Differential Impression
+                  <HeartPulse className="w-3.5 h-3.5" /> Lifestyle Habit Assessment
                 </span>
                 <span className="text-[10px] text-slate-500 font-mono">TIMESTAMP: {localReport.timestamp}</span>
               </div>
@@ -135,10 +141,10 @@ export const AiAdvisorModal = ({ isOpen, onClose, logs, profile, onUpdateProfile
               </p>
             </div>
 
-            {/* Critical Anomalies & Pathologies */}
+            {/* Observed Variances */}
             <div>
               <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-1.5">
-                <AlertTriangle className="w-3.5 h-3.5 text-amber-400" /> Identified Biomarker Variances
+                <AlertTriangle className="w-3.5 h-3.5 text-amber-400" /> Observed Habit Patterns
               </h4>
               <div className="space-y-2">
                 {localReport.alerts.map((alert, idx) => (
@@ -150,10 +156,10 @@ export const AiAdvisorModal = ({ isOpen, onClose, logs, profile, onUpdateProfile
               </div>
             </div>
 
-            {/* Strategic Clinical Protocol (Rx) */}
+            {/* Actionable Suggestions */}
             <div>
               <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Clinical Action Protocol (Rx)
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Actionable Habit Suggestions
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 {localReport.actionPlan.map((plan, idx) => (
@@ -179,7 +185,7 @@ export const AiAdvisorModal = ({ isOpen, onClose, logs, profile, onUpdateProfile
             <div className="flex items-start gap-2 px-3 py-2 rounded-xl bg-purple-950/40 border border-purple-800/50 text-purple-300 text-xs font-sans">
               <Bot className="w-4 h-4 shrink-0 text-purple-400 mt-0.5" />
               <div>
-                <strong>External Clinical AI (Opt-In):</strong> 7-day anonymized biometric telemetry will be synthesized by Google Gemini AI.
+                <strong>External AI (Opt-In):</strong> 7-day anonymized habit logs will be summarized by Google Gemini AI.
               </div>
             </div>
 
@@ -209,7 +215,7 @@ export const AiAdvisorModal = ({ isOpen, onClose, logs, profile, onUpdateProfile
                   ) : (
                     <>
                       <Sparkles className="w-3.5 h-3.5" />
-                      <span>Generate AI Synthesis</span>
+                      <span>Generate AI Summary</span>
                     </>
                   )}
                 </button>
@@ -231,10 +237,10 @@ export const AiAdvisorModal = ({ isOpen, onClose, logs, profile, onUpdateProfile
                 <div className="bg-purple-950/20 border border-purple-800/40 rounded-2xl p-4">
                   <div className="flex items-center justify-between mb-2 font-mono">
                     <span className="text-xs font-bold text-purple-400 flex items-center gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5" /> Gemini Clinical Synthesis
+                      <Sparkles className="w-3.5 h-3.5" /> Gemini Wellness Summary
                     </span>
                     <span className="text-[10px] bg-purple-900/60 text-purple-200 px-2 py-0.5 rounded font-bold">
-                      Burnout Risk: {externalAnalysis.riskLevel}
+                      Fatigue Risk: {externalAnalysis.riskLevel}
                     </span>
                   </div>
                   <p className="text-xs text-slate-200 leading-relaxed mb-2 font-sans">

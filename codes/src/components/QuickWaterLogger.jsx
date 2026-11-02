@@ -12,24 +12,24 @@ export const QuickWaterLogger = ({ currentWater, targetWater, onUpdateWater }) =
       <div className="flex items-center justify-between mb-2">
         <div>
           <span className="text-[10px] text-cyan-400 font-bold uppercase tracking-wider block">
-            ASSAY #H2O-INF
+            HYDRATION TRACKER
           </span>
           <h3 className="text-xs font-bold text-white flex items-center gap-1.5 mt-0.5">
             <Droplet className="w-3.5 h-3.5 text-cyan-400" />
-            Graduated Fluid Infusion Visualizer
+            Daily Hydration Level
           </h3>
           <p className="text-[10px] text-slate-400 font-sans">
-            Real-time fluid volumetric assay & hydration titration
+            Track your daily fluid intake towards target
           </p>
         </div>
         <span className="text-xs font-bold text-cyan-300 bg-cyan-950/90 border border-cyan-800/60 px-2.5 py-1 rounded">
-          {percentage}% DOSAGE
+          {percentage}% OF TARGET
         </span>
       </div>
 
       <div className="flex items-center justify-around my-3 gap-3">
         
-        {/* Medical Graduated Fluid Cylinder */}
+        {/* Hydration Cylinder */}
         <div className="relative w-24 h-40 border-2 border-slate-600 rounded-b-xl rounded-t-sm bg-slate-950/90 overflow-hidden flex flex-col justify-end shadow-inner">
           
           {/* Volumetric Graduation Ticks on side */}
@@ -62,14 +62,14 @@ export const QuickWaterLogger = ({ currentWater, targetWater, onUpdateWater }) =
           </div>
         </div>
 
-        {/* Quick Clinical Administration Actions */}
+        {/* Quick Water Actions */}
         <div className="flex flex-col gap-2 font-mono">
           <button
             onClick={() => onUpdateWater(Math.min(6, +(water + 0.25).toFixed(2)))}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shadow-sm transition-all hover:scale-105 active:scale-95"
           >
             <Plus className="w-3.5 h-3.5 stroke-[3]" />
-            <span>+250 ml Bolus</span>
+            <span>+250 ml Glass</span>
           </button>
 
           <button
@@ -77,7 +77,7 @@ export const QuickWaterLogger = ({ currentWater, targetWater, onUpdateWater }) =
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 font-semibold text-xs border border-cyan-800/40 transition-all hover:scale-105 active:scale-95"
           >
             <Plus className="w-3.5 h-3.5" />
-            <span>+500 ml Flask</span>
+            <span>+500 ml Bottle</span>
           </button>
 
           <div className="flex items-center gap-2">
@@ -94,7 +94,7 @@ export const QuickWaterLogger = ({ currentWater, targetWater, onUpdateWater }) =
             <button
               onClick={() => onUpdateWater(0)}
               className="p-1.5 rounded bg-slate-900 hover:bg-rose-950/60 text-slate-400 hover:text-rose-400 text-xs border border-slate-700 transition-colors"
-              title="Reset Fluid Assay to 0"
+              title="Reset Daily Water to 0"
             >
               <RotateCcw className="w-3.5 h-3.5" />
             </button>
@@ -104,7 +104,7 @@ export const QuickWaterLogger = ({ currentWater, targetWater, onUpdateWater }) =
       </div>
 
       <div className="pt-2.5 border-t border-slate-800 flex items-center justify-between text-[10px] text-slate-400">
-        <span>Clinical Rule: 250ml / 90min Interval</span>
+        <span>Hydration Tip: ~250ml every 90 mins</span>
         <span className="text-cyan-300 font-bold">{Math.max(0, (target - water).toFixed(2))}L Remaining</span>
       </div>
 

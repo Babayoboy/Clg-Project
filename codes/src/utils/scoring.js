@@ -161,7 +161,7 @@ export const generateDiagnosticReport = (logs, profile) => {
   // 1. Sleep Debt Analysis
   if (avgSleep < 6.0) {
     burnoutPoints += 30;
-    alerts.push(`Sleep Deficit: Your 7-day average sleep is ${avgSleep.toFixed(1)}h (below recommended 7-9h threshold).`);
+    alerts.push(`Low Sleep: Your 7-day average sleep is ${avgSleep.toFixed(1)}h (below recommended 7-9h threshold).`);
     recommendations.push('Establish a consistent sleep schedule. Dim lights and disconnect screens 45 minutes before bed.');
   } else if (avgSleep > 9.5) {
     alerts.push(`High Sleep Duration: Averaging ${avgSleep.toFixed(1)}h. If you still feel exhausted, investigate lethargy triggers.`);

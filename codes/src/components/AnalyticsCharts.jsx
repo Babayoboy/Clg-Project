@@ -23,7 +23,7 @@ export const AnalyticsCharts = ({ logs, profile }) => {
   if (!logs || logs.length === 0) {
     return (
       <div className="clinical-panel rounded-2xl p-8 text-center text-slate-400 font-mono">
-        NO BIOMETRIC TELEMETRY DETECTED IN LOCAL REGISTRY.
+        NO HABIT LOG DATA RECORDED YET. LOG TODAY'S HABITS TO VIEW TRENDS.
       </div>
     );
   }
@@ -87,10 +87,10 @@ export const AnalyticsCharts = ({ logs, profile }) => {
         <div>
           <h2 className="text-sm font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
             <Activity className="w-4 h-4 text-cyan-400" />
-            Longitudinal Telemetry & Multi-Channel Recorder
+            Habit Trends & Progress Charts
           </h2>
           <p className="text-[11px] text-slate-400 font-sans">
-            Continuous waveform recording of Circadian, Neuro-Digital, and Fluidic Biomarkers
+            Daily trends for Sleep, Screen Time, Water, and Activity over time
           </p>
         </div>
 
@@ -122,22 +122,22 @@ export const AnalyticsCharts = ({ logs, profile }) => {
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-[10px] bg-cyan-950/80 text-cyan-300 border border-cyan-800/50 px-1.5 py-0.2 rounded font-bold">
-                  RECORDER CH-1 / CH-2 / CH-3
+                  HABIT METRICS
                 </span>
               </div>
-              <h3 className="text-xs font-bold text-white mt-1">Multi-Channel Patient Telemetry Waveform</h3>
+              <h3 className="text-xs font-bold text-white mt-1">Daily Habit Comparison Graph</h3>
             </div>
 
             {/* Legend & Channel Indicators */}
             <div className="flex items-center flex-wrap gap-3 text-xs">
               <span className="flex items-center gap-1.5 text-indigo-400 font-mono text-[11px]">
-                <span className="w-2.5 h-2.5 rounded-sm bg-indigo-500"></span> CH-1: Sleep ({avgSleep}h avg)
+                <span className="w-2.5 h-2.5 rounded-sm bg-indigo-500"></span> Sleep ({avgSleep}h avg)
               </span>
               <span className="flex items-center gap-1.5 text-purple-400 font-mono text-[11px]">
-                <span className="w-2.5 h-2.5 rounded-sm bg-purple-500"></span> CH-2: Screen ({avgScreen}h avg)
+                <span className="w-2.5 h-2.5 rounded-sm bg-purple-500"></span> Screen ({avgScreen}h avg)
               </span>
               <span className="flex items-center gap-1.5 text-cyan-400 font-mono text-[11px]">
-                <span className="w-2.5 h-2.5 rounded-sm bg-cyan-400"></span> CH-3: Water ({avgWater}L avg)
+                <span className="w-2.5 h-2.5 rounded-sm bg-cyan-400"></span> Water ({avgWater}L avg)
               </span>
             </div>
           </div>
@@ -323,13 +323,13 @@ export const AnalyticsCharts = ({ logs, profile }) => {
             </div>
           </div>
 
-          {/* Differential Diagnostic Correlation Highlight */}
+          {/* Habit Insight */}
           <div className="clinical-panel rounded-2xl p-4 border-slate-700/80 bg-gradient-to-br from-indigo-950/30 to-purple-950/20">
             <h4 className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 mb-1 flex items-center gap-1">
-              <CheckCircle2 className="w-3.5 h-3.5" /> Clinical Differential Correlation
+              <CheckCircle2 className="w-3.5 h-3.5" /> Habit Insight
             </h4>
             <p className="text-xs text-slate-300 font-sans leading-relaxed">
-              When screen load exceeds <strong className="text-purple-300 font-mono">6.5 hrs</strong>, circadian sleep duration decreases by <strong className="text-rose-400 font-mono">1.4 hrs</strong> with an observed 3x increase in somnolence reports.
+              When screen time exceeds <strong className="text-purple-300 font-mono">6.5 hrs</strong>, nightly sleep duration drops by <strong className="text-rose-400 font-mono">~1.4 hrs</strong>, leading to lower energy the next day.
             </p>
           </div>
 

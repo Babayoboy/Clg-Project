@@ -16,33 +16,33 @@ export const generateLocalAIAnalysis = (logs, profile) => {
   
   let lifestyleSummary = '';
   if (diag.burnoutIndex >= 50) {
-    lifestyleSummary = `Your biometric and behavioral indicators reflect high physiological load. There is an active correlation between screen time (${diag.averages.screen} hrs/day) and reduced sleep duration (${diag.averages.sleep} hrs/day). Immediate habit recalibration is recommended.`;
+    lifestyleSummary = `Your recent habits show elevated fatigue. Higher screen time (${diag.averages.screen} hrs/day) appears to be cutting into your sleep (${diag.averages.sleep} hrs/day). Easing screen use in the evening will help you recharge.`;
   } else if (diag.burnoutIndex >= 25) {
-    lifestyleSummary = `Your lifestyle metrics show moderate stability, but irregular hydration (${goodHydrationDays}/7 target days) and fluctuating sleep routines are causing periodic energy slumps.`;
+    lifestyleSummary = `Your daily habits look fairly balanced, though drinking water more regularly (${goodHydrationDays}/7 target days) and keeping a steady bedtime will help boost your daytime energy.`;
   } else {
-    lifestyleSummary = `Outstanding lifestyle equilibrium! You have maintained optimal sleep on ${goodSleepDays}/7 days and controlled screen fatigue. Keep nurturing this routine.`;
+    lifestyleSummary = `Great routine! You met your sleep goal on ${goodSleepDays}/7 days and kept screen time well balanced. Keep up the healthy habits!`;
   }
 
   const strategicActionPlan = [
     {
-      title: 'Digital Sunset & Melatonin Protection',
-      detail: 'Set a hard boundary to disconnect from bright screens at least 45 minutes before sleep. Blue light from displays suppresses natural melatonin secretion.',
-      impact: 'High Impact on Sleep Quality'
+      title: 'Evening Screen Wind-down',
+      detail: 'Set a gentle goal to disconnect from bright screens at least 45 minutes before bed so your eyes and mind can wind down naturally.',
+      impact: 'Helps You Fall Asleep Faster'
     },
     {
-      title: 'Hydration Frontloading',
-      detail: `Aim to consume at least 1.5 Litres of your ${profile?.target_water || 3.0}L daily target before 2:00 PM to combat afternoon cognitive fatigue.`,
-      impact: 'Immediate Energy Reset'
+      title: 'Morning & Afternoon Water Goal',
+      detail: `Aim to drink at least 1.5 Litres of your ${profile?.target_water || 3.0}L daily target before late afternoon to stay refreshed and focused.`,
+      impact: 'Keeps Energy Steady'
     },
     {
-      title: 'Active Decompression Micro-breaks',
-      detail: 'Implement 5-minute movement or eye-resting intervals after every 50 minutes of deep desk work.',
-      impact: 'Burnout Prevention'
+      title: 'Short Movement Breaks',
+      detail: 'Take a 5-minute stretch or walk after every 50 minutes of sitting or computer work.',
+      impact: 'Reduces Physical Fatigue'
     }
   ];
 
   return {
-    source: 'On-Device Private Diagnostics Engine (Rule-based AI)',
+    source: 'On-Device Analysis (Private & Local)',
     isExternal: false,
     timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     vitalityScore: 100 - diag.burnoutIndex,

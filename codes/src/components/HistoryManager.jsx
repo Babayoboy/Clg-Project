@@ -46,15 +46,15 @@ export const HistoryManager = ({
         const parsed = JSON.parse(event.target.result);
         if (parsed.logs && Array.isArray(parsed.logs)) {
           onImportLogs(parsed.logs);
-          alert(`Successfully imported ${parsed.logs.length} clinical records!`);
+          alert(`Successfully imported ${parsed.logs.length} log entries!`);
         } else if (Array.isArray(parsed)) {
           onImportLogs(parsed);
-          alert(`Successfully imported ${parsed.length} clinical records!`);
+          alert(`Successfully imported ${parsed.length} log entries!`);
         } else {
-          alert('Invalid JSON clinical backup structure.');
+          alert('Invalid JSON backup structure.');
         }
       } catch (err) {
-        alert('Error parsing clinical file: ' + err.message);
+        alert('Error parsing file: ' + err.message);
       }
     };
     reader.readAsText(file);
@@ -67,14 +67,14 @@ export const HistoryManager = ({
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 mb-4">
         <div>
           <span className="text-[10px] text-cyan-400 font-bold uppercase tracking-wider block">
-            SPECIMEN REGISTRY #REG-DB
+            ACTIVITY LOGBOOK
           </span>
           <h2 className="text-sm font-bold text-white flex items-center gap-1.5 mt-0.5">
             <ClipboardList className="w-4 h-4 text-cyan-400" />
-            Clinical Specimen Registry & Case Logbook
+            Daily Activity Logbook & History
           </h2>
           <p className="text-[10px] text-slate-400 font-sans">
-            Longitudinal biometric database conforming to Hnazer IGNOU schema
+            Personal habit log history stored locally on your device
           </p>
         </div>
 
@@ -84,7 +84,7 @@ export const HistoryManager = ({
           <button
             onClick={() => exportDataAsCSV(logs)}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs text-slate-300 hover:text-white transition-all shadow-sm"
-            title="Download CSV for Laboratory Analysis"
+            title="Export data as CSV"
           >
             <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-400" />
             <span>Export CSV</span>
@@ -94,7 +94,7 @@ export const HistoryManager = ({
           <button
             onClick={() => exportDataAsJSON(logs, profile)}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs text-slate-300 hover:text-white transition-all shadow-sm"
-            title="Download Encrypted JSON Dossier"
+            title="Download JSON backup"
           >
             <FileJson className="w-3.5 h-3.5 text-amber-400" />
             <span>Backup JSON</span>
@@ -118,7 +118,7 @@ export const HistoryManager = ({
             className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shadow-md shadow-cyan-500/20 transition-all"
           >
             <Plus className="w-3.5 h-3.5 stroke-[3]" />
-            <span>+ New Assay</span>
+            <span>+ New Entry</span>
           </button>
         </div>
       </div>
@@ -130,7 +130,7 @@ export const HistoryManager = ({
           <Search className="w-3.5 h-3.5 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Search specimen date or notes..."
+            placeholder="Search by date or notes..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full bg-slate-950 border border-slate-700 rounded-xl pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
@@ -145,13 +145,13 @@ export const HistoryManager = ({
             onChange={(e) => setMoodFilter(e.target.value)}
             className="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-slate-300 focus:outline-none focus:border-cyan-500 cursor-pointer"
           >
-            <option value="All">All Affect States</option>
-            <option value="Energized">⚡ Energized (Hyper)</option>
-            <option value="Good">😊 Good (Euthymic)</option>
-            <option value="Neutral">😐 Neutral (Stable)</option>
-            <option value="Tired">🥱 Tired (Somnolent)</option>
-            <option value="Stressed">😫 Stressed (Cortisol)</option>
-            <option value="Burnout Alert">🤯 Burnout Alert (Critical)</option>
+            <option value="All">All Moods</option>
+            <option value="Energized">⚡ Energized</option>
+            <option value="Good">😊 Good</option>
+            <option value="Neutral">😐 Neutral</option>
+            <option value="Tired">🥱 Tired</option>
+            <option value="Stressed">😫 Stressed</option>
+            <option value="Burnout Alert">🤯 Burnout Alert</option>
           </select>
         </div>
       </div>
@@ -176,7 +176,7 @@ export const HistoryManager = ({
             {filteredLogs.length === 0 ? (
               <tr>
                 <td colSpan="9" className="py-8 text-center text-slate-500">
-                  No specimen records match query criteria.
+                  No log entries match your search criteria.
                 </td>
               </tr>
             ) : (
@@ -197,7 +197,7 @@ export const HistoryManager = ({
                     </td>
                     <td className="py-2.5 px-2.5">
                       <span className={sleepVal >= 7 ? 'text-indigo-300' : 'text-rose-400 font-bold'}>
-                        {sleepVal.toFixed(1)}h {sleepVal < 6 ? '[L]' : sleepVal > 9 ? '[H]' : '[N]'}
+                        {sleepVal.toFixed(1)}h {sleepVal < 6 ? '[Low]' : sleepVal > 9 ? '[High]' : '[OK]'}
                       </span>
                     </td>
                     <td className="py-2.5 px-2.5 text-amber-300">
@@ -205,12 +205,12 @@ export const HistoryManager = ({
                     </td>
                     <td className="py-2.5 px-2.5">
                       <span className={waterVal >= 2.5 ? 'text-cyan-300' : 'text-amber-400 font-bold'}>
-                        {waterVal.toFixed(1)}L {waterVal < 2 ? '[L]' : '[N]'}
+                        {waterVal.toFixed(1)}L {waterVal < 2 ? '[Low]' : '[OK]'}
                       </span>
                     </td>
                     <td className="py-2.5 px-2.5">
                       <span className={screenVal <= 5 ? 'text-purple-300' : 'text-rose-400 font-bold'}>
-                        {screenVal.toFixed(1)}h {screenVal > 7 ? '[H]' : '[N]'}
+                        {screenVal.toFixed(1)}h {screenVal > 7 ? '[High]' : '[OK]'}
                       </span>
                     </td>
                     <td className="py-2.5 px-2.5">
@@ -231,18 +231,18 @@ export const HistoryManager = ({
                         <button
                           onClick={() => onEditLog(log)}
                           className="p-1 rounded bg-slate-900 hover:bg-cyan-950 text-slate-400 hover:text-cyan-300 transition-colors"
-                          title="Edit Specimen Record"
+                          title="Edit Log Entry"
                         >
                           <Edit3 className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => {
-                            if (window.confirm(`Delete specimen record for ${log.date}?`)) {
+                            if (window.confirm(`Delete log entry for ${log.date}?`)) {
                               onDeleteLog(log.id || log.date);
                             }
                           }}
                           className="p-1 rounded bg-slate-900 hover:bg-rose-950 text-slate-400 hover:text-rose-400 transition-colors"
-                          title="Purge Record"
+                          title="Delete Entry"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
@@ -257,8 +257,8 @@ export const HistoryManager = ({
       </div>
 
       <div className="mt-3 flex items-center justify-between text-[10px] text-slate-400">
-        <span>Displaying <strong>{filteredLogs.length}</strong> of <strong>{logs.length}</strong> verified clinical specimens</span>
-        <span className="text-slate-500">Flags: [N] Normal • [L] Low Deficit • [H] High Elevation</span>
+        <span>Displaying <strong>{filteredLogs.length}</strong> of <strong>{logs.length}</strong> logged entries</span>
+        <span className="text-slate-500">Stored locally in your browser</span>
       </div>
 
     </div>

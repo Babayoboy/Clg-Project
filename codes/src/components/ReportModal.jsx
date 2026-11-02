@@ -10,10 +10,11 @@ import {
   CheckCircle,
   Calendar,
   HeartPulse,
-  QrCode,
   FileCheck,
-  Stethoscope,
-  ClipboardList
+  Sparkles,
+  ClipboardList,
+  AlertTriangle,
+  Info
 } from 'lucide-react';
 import { generateDiagnosticReport, calculateStreaks } from '../utils/scoring.js';
 
@@ -36,19 +37,19 @@ export const ReportModal = ({ isOpen, onClose, logs, profile }) => {
         {/* Actions Bar (hidden in print) */}
         <div className="flex items-center justify-between pb-4 border-b border-slate-800 no-print">
           <div className="flex items-center gap-2">
-            <HeartPulse className="w-5 h-5 text-cyan-400" />
+            <HeartPulse className="w-5 h-5 text-[#58a4b0]" />
             <h2 className="text-sm font-bold text-white uppercase tracking-wider">
-              Official Clinical Diagnostic Pathology & Health Report
+              Personal Health & Wellness Summary Report
             </h2>
           </div>
           
           <div className="flex items-center gap-3">
             <button
               onClick={handlePrint}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/20 hover:scale-105 transition-all"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#58a4b0] to-teal-500 text-slate-950 font-bold text-xs shadow-lg shadow-[#58a4b0]/20 hover:scale-105 transition-all"
             >
               <Printer className="w-4 h-4" />
-              <span>Print Clinical PDF</span>
+              <span>Print Report</span>
             </button>
             <button
               onClick={onClose}
@@ -59,182 +60,199 @@ export const ReportModal = ({ isOpen, onClose, logs, profile }) => {
           </div>
         </div>
 
-        {/* AUTHENTIC PRINTABLE CLINICAL MEDICAL REPORT */}
+        {/* PRINTABLE PERSONAL HEALTH & LIFESTYLE REPORT */}
         <div className="mt-4 text-slate-900 bg-white p-8 sm:p-10 rounded-2xl shadow-xl border border-slate-300 font-sans" id="printable-report">
           
-          {/* Institutional Hospital / Lab Header */}
+          {/* Header */}
           <div className="border-b-2 border-slate-900 pb-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-2xl font-black font-display tracking-tight text-slate-950">
-                  HNAZER CLINICAL BIOMETRICS & DIAGNOSTIC LAB
+                  HNAZER HEALTH TRACKER
                 </span>
               </div>
               <p className="text-xs text-slate-700 font-medium mt-0.5">
-                Department of Preventive Lifestyle Medicine & Circadian Informatics • Open Source Health Platform
+                Personal Lifestyle & Habit Summary Report • Daily Self-Tracking Analytics
               </p>
               <p className="text-[10px] text-slate-500 font-mono mt-0.5">
-                NABL / ISO-15189 Telemetry Architecture Guidelines • Verified Client-Side Encrypted Database
+                On-Device Encrypted Records • Open Source Wellness Platform
               </p>
             </div>
 
-            {/* Barcode & Report ID */}
+            {/* Report Meta Info */}
             <div className="text-right font-mono text-xs text-slate-700 shrink-0">
-              <div className="w-28 h-7 barcode-strip ml-auto opacity-90"></div>
-              <div className="text-[10px] text-slate-500 font-bold mt-1">REPORT REF: HNZ-2026-DX-994</div>
+              <div className="text-[11px] text-slate-800 font-bold">
+                Date: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+              </div>
+              <div className="text-[10px] text-slate-500 mt-1">
+                Total Days Tracked: <strong>{logs.length}</strong>
+              </div>
             </div>
           </div>
 
-          {/* Patient Demographics & Record Banner */}
+          {/* CAUTION / INFORMATIONAL DISCLAIMER */}
+          <div className="bg-amber-50 border border-amber-300 rounded-xl p-3.5 my-4 flex items-start gap-3 text-amber-900 text-xs">
+            <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+            <div>
+              <strong className="font-bold text-amber-950 uppercase tracking-wide block text-[11px] mb-0.5">
+                Caution & Informational Disclaimer:
+              </strong>
+              <p className="leading-relaxed text-[11px] text-amber-900">
+                This report is compiled strictly from <strong>self-reported lifestyle inputs</strong> (sleep, hydration, physical activity, and screen exposure) for personal awareness and habit optimization. It is <strong>NOT an official medical, clinical, or diagnostic report</strong> and must not be used for diagnosis, medical decision-making, or treatment. Always consult a qualified physician or healthcare provider for any health or medical concerns.
+              </p>
+            </div>
+          </div>
+
+          {/* User Demographics & Record Banner */}
           <div className="bg-slate-50 border border-slate-300 rounded-xl p-4 my-4">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
               <div>
-                <span className="text-[10px] text-slate-500 uppercase font-mono block">Patient Name:</span>
-                <strong className="text-slate-900 text-sm">{profile?.name || 'Ansh Joshi'}</strong>
+                <span className="text-[10px] text-slate-500 uppercase font-mono block">User / Profile:</span>
+                <strong className="text-slate-900 text-sm">{profile?.name || 'User'}</strong>
               </div>
 
               <div>
-                <span className="text-[10px] text-slate-500 uppercase font-mono block">Medical Record (MRN):</span>
-                <strong className="text-slate-900 font-mono">#HNZ-2026-{profile?.user_id || 101}</strong>
+                <span className="text-[10px] text-slate-500 uppercase font-mono block">Profile Identifier:</span>
+                <strong className="text-slate-900 font-mono">#HNZ-{profile?.user_id || 101}</strong>
               </div>
 
               <div>
-                <span className="text-[10px] text-slate-500 uppercase font-mono block">Age / Sex / Specimen:</span>
-                <span className="text-slate-800 font-medium">22Y / Male • Routine Bio</span>
+                <span className="text-[10px] text-slate-500 uppercase font-mono block">Tracking Scope:</span>
+                <span className="text-slate-800 font-medium">Daily Habits & Lifestyle</span>
               </div>
 
               <div>
-                <span className="text-[10px] text-slate-500 uppercase font-mono block">Evaluation Date:</span>
+                <span className="text-[10px] text-slate-500 uppercase font-mono block">Generated On:</span>
                 <span className="text-slate-800 font-mono">{new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
               </div>
             </div>
 
             <div className="border-t border-slate-200 mt-3 pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between text-[11px] text-slate-600 gap-2">
               <div>
-                <span>Evaluation Cohort: <strong>{logs.length} Logged Days Sampled</strong></span>
+                <span>Sampled Logged Days: <strong>{logs.length} Days</strong></span>
                 <span className="mx-2">•</span>
-                <span>Category: <strong>IGNOU Term-End Project Academic Dossier</strong></span>
+                <span>Type: <strong>Self-Reported Personal Health Log</strong></span>
               </div>
-              <div className="font-mono text-emerald-800 font-bold bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300">
-                STATUS: FINAL VERIFIED CLINICAL DOSSIER
+              <div className="font-mono text-cyan-900 font-bold bg-cyan-100 px-2 py-0.5 rounded border border-cyan-300 text-[10px]">
+                STATUS: PERSONAL WELLNESS SUMMARY
               </div>
             </div>
           </div>
 
-          {/* Executive Clinical Triage Summary */}
+          {/* Daily Health & Habit Summary */}
           <div className="border border-slate-300 rounded-xl p-4 mb-5 bg-gradient-to-r from-slate-50 to-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
               <h3 className="text-xs font-bold uppercase font-mono tracking-wider text-slate-800">
-                Executive Health Index & Clinical Triaging
+                Daily Health & Habit Summary
               </h3>
               <p className="text-xs text-slate-600 mt-1">
-                Multi-channel physiological evaluation of sleep debt, digital blue-load, kinetic expenditure, and fluid balance.
+                Overview based on your daily sleep, water intake, exercise, and screen time.
               </p>
             </div>
             <div className="flex items-center gap-4 shrink-0 font-mono">
               <div className="text-right">
-                <div className="text-[9px] text-slate-500 font-bold uppercase">Vitality Score</div>
+                <div className="text-[9px] text-slate-500 font-bold uppercase">Health Score</div>
                 <div className="text-2xl font-black text-cyan-800">{100 - diagnostics.burnoutIndex} / 100</div>
               </div>
               <div className="text-right pl-4 border-l border-slate-300">
-                <div className="text-[9px] text-slate-500 font-bold uppercase">Burnout Triage</div>
+                <div className="text-[9px] text-slate-500 font-bold uppercase">Fatigue Level</div>
                 <div className={`text-sm font-bold ${
                   diagnostics.riskLevel === 'Critical' ? 'text-red-700' :
                   diagnostics.riskLevel === 'Moderate' ? 'text-amber-700' :
                   'text-emerald-700'
                 }`}>
-                  {diagnostics.riskLevel.toUpperCase()} RISK
+                  {diagnostics.riskLevel.toUpperCase()}
                 </div>
               </div>
             </div>
           </div>
 
-          {/* CLINICAL LABORATORY ASSAY TABLE */}
+          {/* DAILY HABIT AVERAGES & TARGET TABLE */}
           <div className="mb-5">
             <h4 className="text-xs font-bold uppercase font-mono tracking-wider text-slate-800 mb-2 flex items-center gap-1.5">
               <ClipboardList className="w-3.5 h-3.5 text-slate-700" />
-              Biometric Laboratory Assay Results & Reference Standards
+              Daily Habit Averages & Healthy Targets
             </h4>
             
             <table className="w-full text-left text-xs border-collapse border border-slate-300 font-mono">
               <thead>
                 <tr className="bg-slate-100 text-slate-800 font-bold border-b border-slate-300">
-                  <th className="p-2 border-r border-slate-300 font-sans">Biometric Parameter / Assay</th>
-                  <th className="p-2 border-r border-slate-300 text-right">Observed Value</th>
+                  <th className="p-2 border-r border-slate-300 font-sans">Tracked Habit</th>
+                  <th className="p-2 border-r border-slate-300 text-right">Your 7D Average</th>
                   <th className="p-2 border-r border-slate-300 text-center">Units</th>
-                  <th className="p-2 border-r border-slate-300">Reference Standard</th>
-                  <th className="p-2 border-r border-slate-300 text-center">Status Flag</th>
-                  <th className="p-2 font-sans">Methodology</th>
+                  <th className="p-2 border-r border-slate-300">Target</th>
+                  <th className="p-2 border-r border-slate-300 text-center">Status</th>
+                  <th className="p-2 font-sans">Data Source</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 text-slate-900">
                 {/* 1. Sleep */}
                 <tr>
-                  <td className="p-2 border-r border-slate-300 font-sans font-medium">Circadian Sleep Duration (7D Avg)</td>
+                  <td className="p-2 border-r border-slate-300 font-sans font-medium">Sleep</td>
                   <td className="p-2 border-r border-slate-300 text-right font-bold">{diagnostics.averages.sleep}</td>
                   <td className="p-2 border-r border-slate-300 text-center text-slate-600">hrs/day</td>
-                  <td className="p-2 border-r border-slate-300 text-slate-600">[ 7.00 — 9.00 ]</td>
+                  <td className="p-2 border-r border-slate-300 text-slate-600">[ 7.0 — 9.0 ]</td>
                   <td className="p-2 border-r border-slate-300 text-center font-bold text-emerald-700">
-                    {parseFloat(diagnostics.averages.sleep) >= 7 ? 'NORMAL [N]' : 'DEFICIT [L]'}
+                    {parseFloat(diagnostics.averages.sleep) >= 7 ? 'ON TRACK' : 'BELOW TARGET'}
                   </td>
-                  <td className="p-2 font-sans text-slate-600 text-[11px]">Circadian Actigraphy</td>
+                  <td className="p-2 font-sans text-slate-600 text-[11px]">Self-Reported Log</td>
                 </tr>
 
                 {/* 2. Physical Exercise */}
                 <tr>
-                  <td className="p-2 border-r border-slate-300 font-sans font-medium">Kinetic Physical Activity (7D Avg)</td>
+                  <td className="p-2 border-r border-slate-300 font-sans font-medium">Exercise & Activity</td>
                   <td className="p-2 border-r border-slate-300 text-right font-bold">{diagnostics.averages.exercise}</td>
                   <td className="p-2 border-r border-slate-300 text-center text-slate-600">min/day</td>
-                  <td className="p-2 border-r border-slate-300 text-slate-600">[ ≥ 45.00 ]</td>
+                  <td className="p-2 border-r border-slate-300 text-slate-600">[ ≥ 30 ]</td>
                   <td className="p-2 border-r border-slate-300 text-center font-bold text-emerald-700">
-                    {diagnostics.averages.exercise >= 30 ? 'OPTIMAL [N]' : 'SEDENTARY [L]'}
+                    {diagnostics.averages.exercise >= 30 ? 'TARGET MET' : 'BELOW TARGET'}
                   </td>
-                  <td className="p-2 font-sans text-slate-600 text-[11px]">Metabolic Calorie Log</td>
+                  <td className="p-2 font-sans text-slate-600 text-[11px]">Self-Reported Log</td>
                 </tr>
 
                 {/* 3. Hydration */}
                 <tr>
-                  <td className="p-2 border-r border-slate-300 font-sans font-medium">Cellular Hydration Intake (7D Avg)</td>
+                  <td className="p-2 border-r border-slate-300 font-sans font-medium">Water Intake</td>
                   <td className="p-2 border-r border-slate-300 text-right font-bold">{diagnostics.averages.water}</td>
                   <td className="p-2 border-r border-slate-300 text-center text-slate-600">Litres/day</td>
-                  <td className="p-2 border-r border-slate-300 text-slate-600">[ ≥ 3.00 ]</td>
+                  <td className="p-2 border-r border-slate-300 text-slate-600">[ ≥ 2.5 ]</td>
                   <td className="p-2 border-r border-slate-300 text-center font-bold text-cyan-800">
-                    {parseFloat(diagnostics.averages.water) >= 2.5 ? 'NORMAL [N]' : 'DEFICIT [L]'}
+                    {parseFloat(diagnostics.averages.water) >= 2.5 ? 'TARGET MET' : 'BELOW TARGET'}
                   </td>
-                  <td className="p-2 font-sans text-slate-600 text-[11px]">Osmotic Fluid Titration</td>
+                  <td className="p-2 font-sans text-slate-600 text-[11px]">Self-Reported Log</td>
                 </tr>
 
                 {/* 4. Screen Time */}
                 <tr>
-                  <td className="p-2 border-r border-slate-300 font-sans font-medium">Neuro-Visual Screen Exposure (7D Avg)</td>
+                  <td className="p-2 border-r border-slate-300 font-sans font-medium">Screen Time</td>
                   <td className="p-2 border-r border-slate-300 text-right font-bold">{diagnostics.averages.screen}</td>
                   <td className="p-2 border-r border-slate-300 text-center text-slate-600">hrs/day</td>
-                  <td className="p-2 border-r border-slate-300 text-slate-600">[ ≤ 5.00 ]</td>
+                  <td className="p-2 border-r border-slate-300 text-slate-600">[ ≤ 5.0 ]</td>
                   <td className="p-2 border-r border-slate-300 text-center font-bold text-purple-800">
-                    {parseFloat(diagnostics.averages.screen) <= 5 ? 'CONTROLLED [N]' : 'ELEVATED [H]'}
+                    {parseFloat(diagnostics.averages.screen) <= 5 ? 'ON TRACK' : 'HIGH'}
                   </td>
-                  <td className="p-2 font-sans text-slate-600 text-[11px]">Photopic Screen Sensor</td>
+                  <td className="p-2 font-sans text-slate-600 text-[11px]">Self-Reported Log</td>
                 </tr>
 
-                {/* 5. Composite Vitality */}
+                {/* 5. Overall Score */}
                 <tr className="bg-slate-50 font-bold">
-                  <td className="p-2 border-r border-slate-300 font-sans">Composite Diagnostic Vitality Score</td>
+                  <td className="p-2 border-r border-slate-300 font-sans">Overall Health Score</td>
                   <td className="p-2 border-r border-slate-300 text-right text-cyan-800">{100 - diagnostics.burnoutIndex}</td>
                   <td className="p-2 border-r border-slate-300 text-center">Score / 100</td>
-                  <td className="p-2 border-r border-slate-300">[ 75.00 — 100.0 ]</td>
-                  <td className="p-2 border-r border-slate-300 text-center text-emerald-700">OPTIMAL [N]</td>
-                  <td className="p-2 font-sans text-[11px]">Multi-Channel Algorithm</td>
+                  <td className="p-2 border-r border-slate-300">[ 75 — 100 ]</td>
+                  <td className="p-2 border-r border-slate-300 text-center text-emerald-700">OPTIMAL</td>
+                  <td className="p-2 font-sans text-[11px]">Daily Habit Score</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          {/* Diagnostic Clinical Impression & Corrective Protocol */}
+          {/* Observations & Suggestions */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
             <div className="p-4 bg-slate-50 rounded-xl border border-slate-300">
               <h5 className="text-xs font-bold text-slate-900 uppercase font-mono mb-2 flex items-center gap-1.5">
                 <FileCheck className="w-3.5 h-3.5 text-slate-700" />
-                Identified Lifestyle Anomalies & Risk Factors
+                Observed Lifestyle Patterns
               </h5>
               <ul className="space-y-1.5 text-xs text-slate-700 list-disc list-inside">
                 {diagnostics.alerts.map((a, i) => (
@@ -245,8 +263,8 @@ export const ReportModal = ({ isOpen, onClose, logs, profile }) => {
 
             <div className="p-4 bg-slate-50 rounded-xl border border-slate-300">
               <h5 className="text-xs font-bold text-slate-900 uppercase font-mono mb-2 flex items-center gap-1.5">
-                <Stethoscope className="w-3.5 h-3.5 text-slate-700" />
-                Evidence-Based Corrective Protocol (Rx)
+                <Sparkles className="w-3.5 h-3.5 text-slate-700" />
+                Suggested Lifestyle Adjustments
               </h5>
               <ul className="space-y-1.5 text-xs text-slate-700 list-disc list-inside">
                 {diagnostics.recommendations.map((r, i) => (
@@ -259,7 +277,7 @@ export const ReportModal = ({ isOpen, onClose, logs, profile }) => {
           {/* Recent Records Logbook Table */}
           <div className="mb-5">
             <h4 className="text-xs font-bold uppercase font-mono tracking-wider text-slate-800 mb-2">
-              Recent Specimen Activity Logbook (Last 10 Records)
+              Recent Daily Activity Log (Last 10 Records)
             </h4>
             <table className="w-full text-left text-xs border-collapse border border-slate-300 font-mono">
               <thead>
@@ -269,8 +287,8 @@ export const ReportModal = ({ isOpen, onClose, logs, profile }) => {
                   <th className="p-1.5 border-r border-slate-300">Exer (m)</th>
                   <th className="p-1.5 border-r border-slate-300">Water (L)</th>
                   <th className="p-1.5 border-r border-slate-300">Screen (h)</th>
-                  <th className="p-1.5 border-r border-slate-300 font-sans">Affect</th>
-                  <th className="p-1.5 font-sans">Clinical Notes</th>
+                  <th className="p-1.5 border-r border-slate-300 font-sans">Mood</th>
+                  <th className="p-1.5 font-sans">Personal Notes</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 text-slate-800">
@@ -289,25 +307,19 @@ export const ReportModal = ({ isOpen, onClose, logs, profile }) => {
             </table>
           </div>
 
-          {/* Official Sign-Off & Verification Seal */}
+          {/* Report Footer & Disclaimer Note */}
           <div className="pt-4 border-t-2 border-slate-900 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-600 gap-4">
             <div>
               <div className="font-mono text-[11px]">
-                System: <strong>Hnazer Clinical Diagnostic Engine v1.0</strong>
+                Platform: <strong>Hnazer Health Tracker v1.0</strong>
               </div>
               <div className="text-[10px] text-slate-500">
-                Verified & Stored Locally via Client Browser LocalStorage / IndexedDB
+                Self-reported personal data stored locally in user's browser. Informational only.
               </div>
             </div>
 
-            {/* Signature & Seal placeholder for academic viva */}
-            <div className="text-right flex flex-col items-end">
-              <div className="w-40 border-b border-slate-400 pb-1 mb-1 text-center font-serif italic text-slate-800">
-                Ansh Joshi
-              </div>
-              <span className="text-[10px] font-mono uppercase text-slate-500">
-                Candidate / Chief Evaluator Signature
-              </span>
+            <div className="text-right text-[11px] font-mono text-slate-600">
+              Personal Summary Prepared For: <strong className="text-slate-900">{profile?.name || 'User'}</strong>
             </div>
           </div>
 
@@ -317,4 +329,3 @@ export const ReportModal = ({ isOpen, onClose, logs, profile }) => {
     </div>
   );
 };
-

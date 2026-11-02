@@ -4,8 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node server/index.js",
-    "dev:client": "vite",
+    "dev": "vite",
     "build": "vite build --outDir ../site --emptyOutDir",
     "preview": "vite preview"
   },

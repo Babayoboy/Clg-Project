@@ -5,13 +5,13 @@ import { calculateMetricScores } from '../utils/scoring.js';
 export const BurnoutRadar = ({ currentLog, profile }) => {
   const scores = calculateMetricScores(currentLog, profile);
 
-  // 6 Axis Biometric Assays
+  // 6 Axis Habit Metrics
   const axes = [
-    { label: 'Circadian Rest', code: 'SLP', score: scores.sleepScore },
-    { label: 'Hydration Osm', code: 'H2O', score: scores.waterScore },
-    { label: 'Kinetic Burn', code: 'ACT', score: scores.exerciseScore },
-    { label: 'Digital Calm', code: 'SCR', score: scores.screenScore },
-    { label: 'Affect Balance', code: 'PSY', score: scores.moodScore },
+    { label: 'Sleep Rest', code: 'SLP', score: scores.sleepScore },
+    { label: 'Hydration', code: 'H2O', score: scores.waterScore },
+    { label: 'Activity', code: 'ACT', score: scores.exerciseScore },
+    { label: 'Screen Calm', code: 'SCR', score: scores.screenScore },
+    { label: 'Mood Balance', code: 'MOD', score: scores.moodScore },
     { label: 'Nutrition', code: 'NUT', score: scores.dietScore }
   ];
 
@@ -41,18 +41,18 @@ export const BurnoutRadar = ({ currentLog, profile }) => {
       <div className="flex items-center justify-between mb-2">
         <div>
           <span className="text-[10px] text-cyan-400 font-bold uppercase tracking-wider block">
-            RETICLE #RAD-06
+            HABIT BALANCE
           </span>
           <h3 className="text-xs font-bold text-white flex items-center gap-1.5 mt-0.5">
             <Compass className="w-3.5 h-3.5 text-cyan-400" />
-            6-Axis Homeostasis Equilibrium Reticle
+            6-Axis Habit Balance Radar
           </h3>
           <p className="text-[10px] text-slate-400 font-sans">
-            Multi-dimensional physiological stability mapping
+            Visual mapping across your 6 key daily habits
           </p>
         </div>
         <span className="text-xs font-bold px-2.5 py-1 rounded bg-cyan-950/90 border border-cyan-800/60 text-cyan-300">
-          {scores.compositeScore}% EQ
+          {scores.compositeScore}% BALANCE
         </span>
       </div>
 
@@ -154,8 +154,8 @@ export const BurnoutRadar = ({ currentLog, profile }) => {
       </div>
 
       <div className="pt-2.5 border-t border-slate-800 flex items-center justify-between text-[10px] text-slate-400">
-        <span>Target Baseline: Fully symmetric hexagon</span>
-        <span className="text-cyan-300 font-bold">Homeostatic Index: {scores.compositeScore}%</span>
+        <span>Target Baseline: Balanced habit profile</span>
+        <span className="text-cyan-300 font-bold">Habit Balance: {scores.compositeScore}%</span>
       </div>
 
     </div>

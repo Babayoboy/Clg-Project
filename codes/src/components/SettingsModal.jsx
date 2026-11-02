@@ -68,7 +68,7 @@ export const SettingsModal = ({
                 <span className="text-[11px] text-slate-500">REF: CFG-SYS-99</span>
               </div>
               <h2 className="text-base sm:text-lg font-bold text-white tracking-wide uppercase">
-                Patient Demographics & Clinical Baselines
+                User Profile & Daily Habit Targets
               </h2>
             </div>
           </div>
@@ -83,19 +83,19 @@ export const SettingsModal = ({
         {/* Settings Form */}
         <form onSubmit={handleSubmit} className="space-y-6 mt-5 text-xs">
 
-          {/* Section 1: Patient Demographic Identity */}
+          {/* Section 1: User Profile */}
           <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 space-y-3">
             <div className="flex items-center justify-between border-b border-slate-850 pb-2">
               <h3 className="font-bold uppercase tracking-wider text-teal-400 flex items-center gap-1.5 text-xs">
-                <User className="w-3.5 h-3.5" /> [CFG-DEMO-01] Patient Master Identity
+                <User className="w-3.5 h-3.5" /> User Profile
               </h3>
-              <span className="text-[10px] text-slate-500">IGNOU DATA DICTIONARY</span>
+              <span className="text-[10px] text-slate-500">IGNOU PROJECT</span>
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
               <div>
                 <label className="block text-[11px] font-semibold text-slate-400 mb-1 uppercase tracking-wider">
-                  Patient Subject Name
+                  User Name
                 </label>
                 <input
                   type="text"
@@ -108,7 +108,7 @@ export const SettingsModal = ({
 
               <div>
                 <label className="block text-[11px] font-semibold text-slate-400 mb-1 uppercase tracking-wider">
-                  Medical Record ID (MRN)
+                  User Identifier (ID)
                 </label>
                 <input
                   type="number"
@@ -121,13 +121,13 @@ export const SettingsModal = ({
             </div>
           </div>
 
-          {/* Section 2: Clinical Target Thresholds */}
+          {/* Section 2: Daily Target Thresholds */}
           <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 space-y-3">
             <div className="flex items-center justify-between border-b border-slate-850 pb-2">
               <h3 className="font-bold uppercase tracking-wider text-sky-400 flex items-center gap-1.5 text-xs">
-                <Target className="w-3.5 h-3.5" /> [REF-RNG-02] Diagnostic Reference Thresholds
+                <Target className="w-3.5 h-3.5" /> Daily Target Thresholds
               </h3>
-              <span className="text-[10px] text-slate-500">HOMEOSTASIS TARGETS</span>
+              <span className="text-[10px] text-slate-500">DAILY GOALS</span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
@@ -152,7 +152,7 @@ export const SettingsModal = ({
               <div className="bg-slate-900/80 border border-slate-800 p-3 rounded-lg">
                 <div className="flex items-center justify-between mb-1.5">
                   <label className="text-[11px] font-semibold text-cyan-300 flex items-center gap-1">
-                    <Droplet className="w-3.5 h-3.5" /> Target Infusion (L)
+                    <Droplet className="w-3.5 h-3.5" /> Target Water (L)
                   </label>
                   <span className="text-[9px] text-slate-500 font-mono">REF: 2.5 - 4.0</span>
                 </div>
@@ -170,7 +170,7 @@ export const SettingsModal = ({
               <div className="bg-slate-900/80 border border-slate-800 p-3 rounded-lg">
                 <div className="flex items-center justify-between mb-1.5">
                   <label className="text-[11px] font-semibold text-amber-300 flex items-center gap-1">
-                    <Flame className="w-3.5 h-3.5" /> Kinetic Goal (Hrs)
+                    <Flame className="w-3.5 h-3.5" /> Exercise Goal (Hrs)
                   </label>
                   <span className="text-[9px] text-slate-500 font-mono">REF: ≥ 0.50</span>
                 </div>
@@ -205,17 +205,17 @@ export const SettingsModal = ({
             </div>
           </div>
 
-          {/* Section 3: Gemini Neural Diagnostic Engine API Key */}
+          {/* Section 3: Gemini AI Wellness Gateway */}
           <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 space-y-2">
             <div className="flex items-center justify-between">
               <h3 className="font-bold uppercase tracking-wider text-purple-400 flex items-center gap-1.5 text-xs">
-                <Cpu className="w-3.5 h-3.5" /> [AI-NEUR-03] Neural Diagnostic Engine Gateway
+                <Cpu className="w-3.5 h-3.5" /> AI Wellness Assistant Gateway
               </h3>
               <span className="text-[10px] text-slate-500">OPTIONAL</span>
             </div>
             <input
               type="password"
-              placeholder="Enter Google Gemini API Key for Automated Clinical Synthesis"
+              placeholder="Enter Google Gemini API Key for AI Wellness Synthesis"
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
               className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-purple-500 font-mono"
@@ -225,19 +225,19 @@ export const SettingsModal = ({
             </p>
           </div>
 
-          {/* Section 4: Privacy & Local Ledger Management */}
+          {/* Section 4: Privacy & Local Data Management */}
           <div className="pt-3 border-t border-slate-800 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
               <div>
-                <p className="text-[11px] font-semibold text-slate-300">Air-Gapped Client Storage</p>
-                <p className="text-[9px] text-slate-500">Account data is stored in the local SQLite database on this device</p>
+                <p className="text-[11px] font-semibold text-slate-300">Local Client Storage</p>
+                <p className="text-[9px] text-slate-500">Account data is stored locally on this device</p>
               </div>
             </div>
             <button
               type="button"
               onClick={() => {
-                if (window.confirm('CLINICAL PURGE WARNING: Are you sure you want to sanitize and purge all specimen logs and patient dossiers?')) {
+                if (window.confirm('WARNING: Are you sure you want to delete all daily logs and reset your tracking history?')) {
                   onResetAllData();
                   onClose();
                 }
@@ -245,7 +245,7 @@ export const SettingsModal = ({
               className="text-[11px] text-rose-400 hover:text-rose-300 border border-rose-500/30 hover:border-rose-500/60 bg-rose-500/10 px-3 py-1.5 rounded-lg flex items-center gap-1.5 font-medium transition-colors"
             >
               <Trash2 className="w-3.5 h-3.5" />
-              <span>Purge Dossier Ledger</span>
+              <span>Reset All Data</span>
             </button>
           </div>
 

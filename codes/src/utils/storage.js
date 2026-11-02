@@ -3,7 +3,7 @@
  * Manages 100% client-side data persistence with LocalStorage, JSON backup, and CSV exporting.
  */
 
-import { getSampleData, DEFAULT_USER_PROFILE } from './sampleData.js';
+import { DEFAULT_USER_PROFILE } from './sampleData.js';
 
 const STORAGE_KEYS = {
   LOGS: 'hnazer_lifestyle_logs_v1',
@@ -13,15 +13,11 @@ const STORAGE_KEYS = {
 export const loadLogsFromStorage = () => {
   try {
     const raw = localStorage.getItem(STORAGE_KEYS.LOGS);
-    if (!raw) {
-      const sample = getSampleData();
-      localStorage.setItem(STORAGE_KEYS.LOGS, JSON.stringify(sample));
-      return sample;
-    }
+    if (!raw) return [];
     return JSON.parse(raw);
   } catch (err) {
     console.error('Error reading logs from storage:', err);
-    return getSampleData();
+    return [];
   }
 };
 
